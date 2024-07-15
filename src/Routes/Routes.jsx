@@ -6,15 +6,18 @@ import About from "../components/Navber/About";
 import AddProduct from "../components/Navber/AddProduct";
 import ViewPrivate from "../components/Home/ViewPrivate";
 import Private from "../components/PrivateRoute/Private";
-import Login from "../components/page/SignIn/Login";
 import SignUp from "../components/page/SignIn/SignUp";
 import UserRegister from "../components/page/SignIn/UserRegister";
 import AgentRegister from "../components/page/SignIn/AgentRegister";
+import LoginWithEmail from "../components/page/SignIn/LoginWithEmail";
+import LoginWithNumber from "../components/page/SignIn/LoginWithNumber";
+import Error from "./Error";
 
 const routes = createBrowserRouter([
     {
       path: "/",
       element: <Root/>,
+      errorElement: <Error/> ,
       children: [
         {
           path: '/',
@@ -29,8 +32,12 @@ const routes = createBrowserRouter([
         element: <About/>
        },
        {
-        path: '/login',
-        element: <Login/>
+        path: '/loginE',
+        element: <LoginWithEmail/>
+       },
+       {
+        path: '/loginN',
+        element: <LoginWithNumber/>
        },
        {
         path: '/register',

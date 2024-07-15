@@ -4,20 +4,20 @@ import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css'
 import "animate.css";
 import { AuthContext } from "../Provider/AuthProvider";
+import useAuth from "../Hooks/useAuth";
 
 
 const Navber = () => {
 
 
-    const { user, logOut } = useContext(AuthContext);
-  const navigate = useNavigate()
-  
-  const handleSignOut = () => {
-    logOut()
-    .then(()=>{
-      navigate('/')
-    })
-    .catch();}
+  const nagivate = useNavigate();
+
+  const {user, logout}  = useAuth();
+
+  const handleLogout =async ()=>{
+  await logout();
+  nagivate('/loginN');
+  }
 
     const menu = <>
     <li > <NavLink  to='/'> Home </NavLink> </li>
@@ -108,7 +108,7 @@ const Navber = () => {
                 <Tooltip  anchorSelect="#clickable" clickable>
                     <p >{user.displayName} </p>
                 <button
-                onClick={handleSignOut}
+                onClick={handleLogout}
                 className="btn bg-red-600 text-white"
               >
                 Logout
@@ -119,7 +119,7 @@ const Navber = () => {
             </div>
           ) : (
             <div className="flex gap-2">
-              <Link to="/login" className="btn bg-green-500 text-white">
+              <Link to="/loginN" className="btn bg-green-500 text-white">
                 Login
               </Link>
               <Link to="/register" className="btn text-green-500 ">

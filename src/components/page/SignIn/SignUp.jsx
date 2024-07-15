@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 
 const SignUp = () => {
+    
+    const {user} = useAuth()
+    const navigate = useNavigate()
 
-
+    if(user) return navigate('/')
     return (
         <div className="my-20">
         <div className=" p-5 w-full border my-20 max-w-sm mx-auto  rounded-lg shadow-lg  lg:max-w-4xl">

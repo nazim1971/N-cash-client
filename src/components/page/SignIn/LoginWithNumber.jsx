@@ -1,13 +1,15 @@
 import {  useState } from "react";
 import {  ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {  FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import useAuth from "../../Hooks/useAuth";
 
 
-const Login = () => {
-
+const LoginWithNumber = () => {
+  const {login,user} = useAuth()
+  const navigate = useNavigate()
 
   
   // show password
@@ -17,12 +19,19 @@ const {
   register,
   handleSubmit
 } = useForm()
-const onSubmit = (data) => {
-  const {email,password} = data
-
+const onSubmit =async (data) => {
+  const {number,pinNumber} = data
+  const userInfo = {
+    number,pinNumber
+  }
+  const res = await login(userInfo);
+  if (res?.Status === "Success") {
+    console.log(res.Status);
+      navigate( "/");
+    }
 }
 
-
+ if(user) return navigate('/')
 
     return (
       <div className="my-20">
@@ -43,25 +52,19 @@ const onSubmit = (data) => {
               <div className="flex items-center justify-between mt-4">
                   <span className="w-1/5 border-b  lg:w-1/4"></span>
       
-                  <a href="#" className="text-xs text-center  uppercase hover:underline">or login
-                      with email</a>
+                  <Link to='/loginE' className="text-xs text-center text-red-500 font-semibold  uppercase hover:underline">login
+                      with Email</Link>
       
                   <span className="w-1/5 border-b  lg:w-1/4"></span>
               </div>
       
               <form  onSubmit={handleSubmit(onSubmit)}>
+      
               <div className="mt-4">
-                  <label className="block mb-2 text-sm font-medium " >Name</label>
+                  <label className="block mb-2 text-sm font-medium " >Number</label>
                   <input
-                  {...register("email",{required: true})}
-                  id="LoggingEmailAddress" className="block w-full px-4 py-2   border rounded-lg  focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300" type="text" placeholder="John" />
-              </div>
-
-              <div className="mt-4">
-                  <label className="block mb-2 text-sm font-medium " >Email Address</label>
-                  <input
-                  {...register("email",{required: true})}
-                  id="LoggingEmailAddress" className="block w-full px-4 py-2   border rounded-lg  focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300" type="email" placeholder="John@gmail.com" />
+                  {...register("number",{required: true})}
+                   className="block w-full px-4 py-2   border rounded-lg  focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300" type="number" placeholder="01XXXXXXXXX" />
               </div>
       
               <div className="mt-4">
@@ -102,4 +105,4 @@ const onSubmit = (data) => {
     );
 };
 
-export default Login;
+export default LoginWithNumber;
