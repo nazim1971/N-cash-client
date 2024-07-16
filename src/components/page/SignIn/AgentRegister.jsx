@@ -29,7 +29,8 @@ const AgentRegister = () => {
       pinNumber,
       role: 'agent',
       status: 'pending',
-      account: 'active'
+      account: 'active',
+      amount:0
     };
     // password validation
     if (!/^\d{5}$/.test(pinNumber)) {
@@ -47,7 +48,7 @@ const AgentRegister = () => {
           if (res.data.insertedId) {
            
             toast.success("Registration Complete");
-            navigate('/login')
+            navigate('/loginE')
           }
         });
       } catch (err) {

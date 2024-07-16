@@ -29,7 +29,8 @@ const UserRegister = () => {
       pinNumber,
       role: 'user',
       status: 'pending',
-      account: 'active'
+      account: 'active',
+      amount: 0
     };
     // password validation
     if (!/^\d{5}$/.test(pinNumber)) {
@@ -47,7 +48,7 @@ const UserRegister = () => {
           if (res.data.insertedId) {
            
             toast.success("Registration Complete");
-            navigate('/login')
+            navigate('/loginE')
           }
         });
       } catch (err) {
@@ -76,7 +77,7 @@ const UserRegister = () => {
           </div>
 
           <p className="mt-3 text-xl text-center ">
-            Welcome to <br /> N-cash Agent Dashboard
+            Welcome to <br /> N-cash User Dashboard
           </p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-4">

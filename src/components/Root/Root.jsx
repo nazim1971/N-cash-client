@@ -9,7 +9,7 @@ const Root = () => {
             <Navber/>
             <Outlet/>
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     );
 };

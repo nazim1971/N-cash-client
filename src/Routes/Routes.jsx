@@ -12,6 +12,10 @@ import AgentRegister from "../components/page/SignIn/AgentRegister";
 import LoginWithEmail from "../components/page/SignIn/LoginWithEmail";
 import LoginWithNumber from "../components/page/SignIn/LoginWithNumber";
 import Error from "./Error";
+import SendMoney from "../components/page/User/SendMoney/SendMoney";
+import SendAmount from "../components/page/User/SendMoney/SendAmount";
+import SendFinal from "../components/page/User/SendMoney/SendFinal";
+import CashOut from "../components/page/User/CashOut/CashOut";
 
 const routes = createBrowserRouter([
     {
@@ -59,6 +63,24 @@ const routes = createBrowserRouter([
        {
         path: '/viewPrivate',
         element: <Private><ViewPrivate/></Private>
+       },
+       //user send money
+       {
+        path: '/sendMoney',
+        element: <SendMoney/>
+       },
+       {
+        path: '/sendAmount',
+        element: <SendAmount/>
+       },
+       {
+        path:'/sendFinal',
+        element: <SendFinal/>
+       },
+       // user cashOut
+       {
+        path: '/cashout',
+        element: <CashOut/>
        }
       ]
     },

@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css'
 import "animate.css";
-import { AuthContext } from "../Provider/AuthProvider";
 import useAuth from "../Hooks/useAuth";
 
 
@@ -13,16 +12,17 @@ const Navber = () => {
   const nagivate = useNavigate();
 
   const {user, logout}  = useAuth();
-
   const handleLogout =async ()=>{
   await logout();
-  nagivate('/loginN');
+  nagivate('/loginE');
   }
 
     const menu = <>
     <li > <NavLink  to='/'> Home </NavLink> </li>
     <li > <NavLink  to='/about'> About </NavLink> </li>
     <li > <NavLink  to='/contect'> Contect </NavLink> </li>
+    <li > <NavLink  to='/sendMoney'> Send Money </NavLink> </li>
+    <li > <NavLink  to='/cashout'> Cashout </NavLink> </li>
     
     {
       user &&  <li > <NavLink  to='/addProduct'>Add Product </NavLink> </li>
