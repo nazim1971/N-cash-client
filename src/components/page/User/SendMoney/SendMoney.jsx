@@ -2,21 +2,21 @@ import { FaArrowRight, FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import Send from "../../../Common/Send";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 
 const SendMoney = () => {
 
   const {setSendUser} = useAuth()
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
   
   const { data: sendUser = [] } = useQuery({
     queryKey: ["sendUser"],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/allUserForSend`,{withCredentials: true});
+      const { data } = await axiosPublic(`/v1/allUserForSend`,{withCredentials: true});
       return data;
     },
   });
@@ -53,7 +53,11 @@ const SendMoney = () => {
              <div className=" mx-8">
              {
               sendUser.map(i=> <div key={i.email} className=" my-5 flex space-x-4">
-                <p className="h-16 w-16 rounded-full bg-red-300"></p>
+                 <img 
+                  className="h-14 w-14 rounded-full   "
+                  src={"https://i.ibb.co/VHD1J6g/user-profile-icon-free-vector.jpg" }
+                  alt=""
+                />
                 <div className="flex w-3/4 col-span-2 items-center justify-between">
                   <p> {i.name} </p>
                  <button onClick={()=> handleUserD(i)}>

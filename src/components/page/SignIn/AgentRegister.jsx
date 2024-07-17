@@ -43,7 +43,7 @@ const AgentRegister = () => {
     try {
         setLoader(true)
        
-         await axiosPublic.post("/addUser", userInfo)
+         await axiosPublic.post("/v1/addUser", userInfo)
          .then((res) => {
           if (res.data.insertedId) {
            
@@ -154,7 +154,7 @@ const AgentRegister = () => {
             <span className="w-1/5 border-b  md:w-1/4"></span>
 
             <Link
-              to="/login"
+              to="/loginE"
               className="text-xs  uppercase  hover:underline text-rose-500"
             >
               or sign in

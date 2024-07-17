@@ -4,8 +4,6 @@ import Home from "../components/Home/Home";
 import Contect from "../components/Navber/Contect";
 import About from "../components/Navber/About";
 import AddProduct from "../components/Navber/AddProduct";
-import ViewPrivate from "../components/Home/ViewPrivate";
-import Private from "../components/PrivateRoute/Private";
 import SignUp from "../components/page/SignIn/SignUp";
 import UserRegister from "../components/page/SignIn/UserRegister";
 import AgentRegister from "../components/page/SignIn/AgentRegister";
@@ -16,6 +14,19 @@ import SendMoney from "../components/page/User/SendMoney/SendMoney";
 import SendAmount from "../components/page/User/SendMoney/SendAmount";
 import SendFinal from "../components/page/User/SendMoney/SendFinal";
 import CashOut from "../components/page/User/CashOut/CashOut";
+import CashoutAmount from "../components/page/User/CashOut/CashoutAmount";
+import CashIn from "../components/page/User/CashIn/CashIn";
+import Private from "./Private";
+import UserRoute from "./UserRoute";
+import UserReq from "../components/page/User/Request/UserReq";
+import UserTransHistory from "../components/page/User/TransHistory/UserTransHistory";
+import AgentRoute from "./AgentRoute";
+import AgentCashoutReq from "../components/page/Agent/CashoutReq/AgentCashoutReq";
+import AgentCashInReq from "../components/page/Agent/CashInReq/AgentCashInReq";
+import AgentTransHistory from "../components/page/Agent/AgentTransHistory/AgentTransHistory";
+import AdminRoute from "./AdminRoute";
+import ManageUser from "../components/page/Admin/ManageUser";
+import AllTrans from "../components/page/Admin/AllTrans";
 
 const routes = createBrowserRouter([
     {
@@ -60,27 +71,62 @@ const routes = createBrowserRouter([
         path: '/addProduct',
         element: <AddProduct/>
        },
-       {
-        path: '/viewPrivate',
-        element: <Private><ViewPrivate/></Private>
-       },
-       //user send money
+       //user related routes
        {
         path: '/sendMoney',
-        element: <SendMoney/>
+        element: <Private> <UserRoute><SendMoney/></UserRoute> </Private>
        },
        {
         path: '/sendAmount',
-        element: <SendAmount/>
+        element: <Private> <UserRoute><SendAmount/></UserRoute> </Private>
        },
        {
         path:'/sendFinal',
-        element: <SendFinal/>
+        element: <Private> <UserRoute><SendFinal/></UserRoute> </Private>
        },
-       // user cashOut
        {
         path: '/cashout',
-        element: <CashOut/>
+        element: <Private> <UserRoute><CashOut/></UserRoute> </Private>
+       },
+       {
+        path: '/cashoutAmount',
+        element: <Private> <UserRoute><CashoutAmount/></UserRoute> </Private>
+       },
+       {
+        path: '/userReq',
+        element: <Private> <UserRoute> <UserReq/> </UserRoute> </Private>
+       },
+       {
+        path: '/cashIn',
+        element: <Private> <UserRoute> <CashIn/> </UserRoute> </Private>
+       },
+       {
+        path: '/userTransHistory',
+        element: <Private> <UserRoute> <UserTransHistory/> </UserRoute> </Private>
+       },
+       // end user related Routes
+
+       // start Agent related route
+       {
+        path: '/agentCashoutReq',
+        element: <Private> <AgentRoute> <AgentCashoutReq/> </AgentRoute> </Private>
+       },
+       {
+        path: '/agentCashInReq',
+        element: <Private> <AgentRoute> <AgentCashInReq/> </AgentRoute> </Private>
+       },
+       {
+        path: '/agentTransHistory',
+        element: <Private> <AgentRoute> <AgentTransHistory/> </AgentRoute> </Private>
+       },
+       // End agent related route
+       {
+        path: '/manageUser',
+        element: <Private> <AdminRoute> <ManageUser/> </AdminRoute> </Private>
+       },
+       {
+        path: '/allTrans',
+        element: <Private> <AdminRoute> <AllTrans/> </AdminRoute> </Private>
        }
       ]
     },

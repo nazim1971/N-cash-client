@@ -4,7 +4,7 @@ import Navber from "../Navber/Navber";
 
 const Root = () => {
     return (
-        <div >
+        <div className="min-h-screen" >
             <div className=" w-[94%] mx-auto ">
             <Navber/>
             <Outlet/>

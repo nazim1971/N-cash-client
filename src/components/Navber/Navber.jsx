@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css'
 import "animate.css";
 import useAuth from "../Hooks/useAuth";
+import useSingleUser from "../Hooks/useSingleUser";
 
 
 const Navber = () => {
@@ -17,16 +18,55 @@ const Navber = () => {
   nagivate('/loginE');
   }
 
+  const {data: loger=[]} = useSingleUser({
+    queryKey:["loger"], params:{email: user?.email}
+  })
+
     const menu = <>
     <li > <NavLink  to='/'> Home </NavLink> </li>
-    <li > <NavLink  to='/about'> About </NavLink> </li>
-    <li > <NavLink  to='/contect'> Contect </NavLink> </li>
-    <li > <NavLink  to='/sendMoney'> Send Money </NavLink> </li>
-    <li > <NavLink  to='/cashout'> Cashout </NavLink> </li>
-    
-    {
-      user &&  <li > <NavLink  to='/addProduct'>Add Product </NavLink> </li>
-    }
+    {loger?.role === 'user' && (
+        <>
+          <li>
+            <NavLink to="/sendMoney">Send Money</NavLink>
+          </li>
+          <li>
+            <NavLink to="/cashout">Cash-Out</NavLink>
+          </li>
+          <li>
+            <NavLink to="/cashIn">Cash-In</NavLink>
+          </li>
+          <li>
+            <NavLink to="/userReq">All Request</NavLink>
+          </li>
+          <li>
+            <NavLink to="/userTransHistory">Transactions</NavLink>
+          </li>
+        </>
+      )}
+      {loger?.role === 'agent' && (
+        <>
+        <li>
+            <NavLink to="/agentCashoutReq">Cash-Out Req</NavLink>
+          </li>
+          <li>
+            <NavLink to="/agentCashInReq">Cash-In Req</NavLink>
+          </li>
+          <li>
+            <NavLink to="/agentTransHistory">Transactions</NavLink>
+          </li>
+        </>
+      )}
+
+    {loger?.role === 'admin' && (
+        <>
+        <li>
+            <NavLink to="/manageUser">Manage User </NavLink>
+          </li>
+          <li>
+            <NavLink to="/allTrans">All Transaction </NavLink>
+          </li>
+        </>
+      )}
     </>
 
     // dark and light mode 

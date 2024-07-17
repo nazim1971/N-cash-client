@@ -6,35 +6,19 @@ import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useSingleUser from "../../../Hooks/useSingleUser";
 
 
 const SendAmount = () => {
-    const axiosPublic = useAxiosPublic()
     const {sendUser,setSendAmount,user} = useAuth();
      
-    const { data: loger = [] } = useQuery({
-        queryKey: ["loger"],
-        queryFn: async () => {
-          const { data } = await axiosPublic.get('/loger', {
-            params: { email: user?.email },
-            withCredentials: true
-          });
-          return data;
-        },
-        enabled: !!user?.email // Only execute the query if user?.email is truthy
-      });
-    
-      const { data: sloger = [] } = useQuery({
-        queryKey: ["sloger"],
-        queryFn: async () => {
-          const { data } = await axiosPublic.get('/loger', {
-            params: { email: sendUser?.email },
-            withCredentials: true
-          });
-          return data;
-        },
-        enabled: !!sendUser?.email // Only execute the query if sendUser?.email is truthy
-      });
+    const {data: loger=[]} = useSingleUser({
+      queryKey:["loger"], params:{email: user?.email}
+    })
+
+      const {data: reciver=[]} = useSingleUser({
+        queryKey:["reciver"], params:{email: sendUser?.email}
+      })
  
     const navigate = useNavigate();
     const {
@@ -59,8 +43,8 @@ const SendAmount = () => {
             <div className="flex items-center gap-5  border p-4 m-6">
                 <p className="bg-red-400 h-16 w-16 rounded-full"></p>
                 <div>
-                    <p> {sloger.name} </p>
-                    <p> {sloger.number} </p>
+                    <p> {reciver.name} </p>
+                    <p> {reciver.number} </p>
                 </div>
             </div>
            <form onSubmit={handleSubmit(onSubmit)}>

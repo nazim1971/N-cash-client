@@ -2,12 +2,12 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import Send from "../../../Common/Send";
 import {   useEffect, useState } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
+import useSingleUser from "../../../Hooks/useSingleUser";
 
 
 const SendFinal = () => {
@@ -27,15 +27,13 @@ const SendFinal = () => {
         }
     },[])
 
-    const { data: loger = [] } = useQuery({
-        queryKey: ["logers"],
-        queryFn: async () => {
-          const { data } = await axiosPublic(`/loger`,{ 
-            params: {email : user?.email},
-            withCredentials: true});
-          return data;
-        },
-      });
+    const {data: loger=[]} = useSingleUser({
+      queryKey:["loger"], params:{email: user?.email}
+    })
+
+      const {data: reciver=[]} = useSingleUser({
+        queryKey:["reciver"], params:{email: sendUser?.email}
+      })
 
 
     const {
@@ -59,11 +57,13 @@ const SendFinal = () => {
             email: user?.email,
             pinNumber: pinNumber
          }
+         const updateReciver = parseFloat(reciver.amount) + convertedAm;
         
           const pin = await pinVerify(input);
           if(pin.Status === "Success"){
-            await axiosPublic.patch('/updateSender',{email: user?.email , amount: updatedAm}, {withCredentials: true} )
-        const {data} = await axiosPublic.post('/sendTrans', transInfo)
+            await axiosPublic.patch('/v1/updateSender',{email: user?.email , amount: updatedAm}, {withCredentials: true} )
+            await axiosPublic.patch('/v1/updateSender',{email: reciver?.email , amount: updateReciver}, {withCredentials: true} )
+        const {data} = await axiosPublic.post('/v1/sendTrans', transInfo, {withCredentials: true})
         console.log(data);
         if (data.insertedId) {
           
@@ -71,17 +71,6 @@ const SendFinal = () => {
            navigate('/')
          }
           }
-        //  if (res?.Status === "Success") {
-           
-        //    }
-        // await axiosPublic.patch('/updateSender',{email: user?.email , amount: updatedAm}, {withCredentials: true} )
-        // const {data} = await axiosPublic.post('/sendTrans', transInfo)
-        // console.log(data);
-        // if (data.insertedId) {
-          
-        //    toast.success("Send Money Complete");
-        //    navigate('/')
-        //  }
 
       }
     return (
@@ -91,8 +80,8 @@ const SendFinal = () => {
            <div className="flex items-center gap-5  border p-4 ">
                 <p className="bg-red-400 h-16 w-16 rounded-full"></p>
                 <div>
-                    <p>Nazim Uddin</p>
-                    <p>01867748073</p>
+                    <p> {reciver.name} </p>
+                    <p> {reciver.number} </p>
                 </div>
             </div>
             <div className="font-semibold grid grid-cols-2 p-4  border text-center  justify-between">
