@@ -6,7 +6,9 @@ import { useState } from "react";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
+
   const [accountStatuses, setAccountStatuses] = useState({});
+  const [userStatuses, setUserStatuses] = useState({});
 
   const { data: allUandA = [] } = useQuery({
     queryKey: ["allUandA"],
@@ -14,15 +16,56 @@ const ManageUser = () => {
       const { data } = await axiosSecure(`/v1/allUandA`, {
         withCredentials: true,
       });
+      const initialAccountStatuses = data.reduce((acc, user) => {
+        acc[user.email] = user.account;
+        return acc;
+      }, {});
+      const initialUserStatuses = data.reduce((acc, user) => {
+        acc[user.email] = user.status;
+        return acc;
+      }, {});
+      setAccountStatuses(initialAccountStatuses);
+      setUserStatuses(initialUserStatuses);
       return data;
     },
   });
-
-  // update account 
-  const handleAccountChange = async(e, item) => {
+  
+  // update account status
+  const handleAccountChange = async (e, item) => {
     const updatedAccount = e.target.value;
-    await axiosSecure.patch('/v1/updateAccount',{email: item?.email , amount: updatedAccount}, {withCredentials: true} )
-    console.log(`Account status for ${item.name} updated to: ${updatedAccount}`);
+    try {
+      await axiosSecure.patch(
+        '/v1/updateAccount',
+        { email: item.email, account: updatedAccount },
+        { withCredentials: true }
+      );
+      setAccountStatuses((prev) => ({
+        ...prev,
+        [item.email]: updatedAccount,
+      }));
+      console.log(`Account status for ${item.name} updated to: ${updatedAccount}`);
+    } catch (error) {
+      console.error('Error updating account status:', error);
+    }
+  };
+
+   // Update user status
+   const handleStatusChange = async (item) => {
+    const updatedStatus = userStatuses[item.email] === "pending" ? "approved" : "pending";
+    try {
+      await axiosSecure.patch(
+        '/v1/updateAccount',
+        { email: item.email, status: updatedStatus },
+        { withCredentials: true }
+      );
+      setUserStatuses((prev) => ({
+        ...prev,
+        [item.email]: updatedStatus,
+      }));
+      console.log(`Status for ${item.name} updated to: ${updatedStatus}`);
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
   };
 
   return (
@@ -49,19 +92,22 @@ const ManageUser = () => {
                   <p> {i.name} </p>
 
                   <div className=" flex gap-2">
-                    <p
-                      className={` py-1 px-2 text-white rounded-2xl ${
-                        i?.status === "pending" ? " bg-red-500" : "bg-green-600"
-                      } `}
+                  <button
+                      className={`py-1 px-2 text-white rounded-2xl ${
+                        userStatuses[i.email] === "pending" ? "bg-red-500" : "bg-green-600 cursor-not-allowed"
+                      }`}
+                      disabled={userStatuses[i.email] === "approved"}
+                      onClick={() => handleStatusChange(i)}
                     >
-                      {" "}
-                      {i?.status}{" "}
-                    </p>
+                      {userStatuses[i.email]}
+                    </button>
                     <select
                       className={`py-1 px-2 text-white rounded-2xl ${
-                        i?.account === "block" ? "bg-red-500" : "bg-green-600"
+                        accountStatuses[i.email] === "block"
+                          ? "bg-red-500"
+                          : "bg-green-600"
                       }`}
-                      defaultValue={i?.account}
+                      value={accountStatuses[i.email] || i.account}
                       onChange={(e) => handleAccountChange(e, i)}
                     >
                       <option value="active">Active</option>
