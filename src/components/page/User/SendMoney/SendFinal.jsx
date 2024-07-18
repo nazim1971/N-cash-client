@@ -46,7 +46,8 @@ const SendFinal = () => {
         const convertedAm =  parseInt(sendAmount)
         const updatedAm = mainAm-convertedAm;
          const transInfo ={
-            method: 'send',
+            status:"success",
+            method: 'Send-Money',
             amount: convertedAm,
             senderEmail: user?.email,
             senderName: user?.name ,

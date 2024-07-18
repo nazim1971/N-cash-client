@@ -159,7 +159,7 @@ const Navber = () => {
             </div>
           ) : (
             <div className="flex gap-2">
-              <Link to="/loginN" className="btn bg-green-500 text-white">
+              <Link to="/loginE" className="btn bg-green-500 text-white">
                 Login
               </Link>
               <Link to="/register" className="btn text-green-500 ">

@@ -2,18 +2,22 @@
 import Send from "../../Common/Send";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
 
   const [accountStatuses, setAccountStatuses] = useState({});
   const [userStatuses, setUserStatuses] = useState({});
+  const [search, setSearch] = useState("");
 
-  const { data: allUandA = [] } = useQuery({
-    queryKey: ["allUandA"],
+
+  const { data: allUandA = [], refetch } = useQuery({
+    queryKey: ["allUandA", search],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/v1/allUandA`, {
+      const { data } = await axiosSecure(`/v1/allUandA`, { params: {name: search},
         withCredentials: true,
       });
       const initialAccountStatuses = data.reduce((acc, user) => {
@@ -67,6 +71,15 @@ const ManageUser = () => {
       console.error('Error updating status:', error);
     }
   };
+  
+
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [search, refetch]);
 
   return (
     <div>
@@ -74,13 +87,26 @@ const ManageUser = () => {
         <Send site={""} title={"Manage User"} />
 
         <div className="">
+
+        <div className="m-10">
+          <div className="mb-2">
+            <label className="pl-4 font-semibold ">Search</label>
+          </div>
+         <div className="flex items-center gap-2">
+         <input
+         value={search}
+         onChange={handleSearchChange}
+                 className="block w-full px-4 py-2  border-[#EC1C24]  border-b-2   focus:border   focus:outline-none " type="text" placeholder="Type User Name" />
+         <Link> <button className="bg-[#EC1C24] h-8 w-8 rounded-full flex justify-center items-center"><FaArrowRight className=" text-white "/></button> </Link>
+         </div>
+          </div>
           <h4 className="border-b-2 my-2 pl-8 pb-4 font-semibold">
             All Users and Agents{" "}
           </h4>
 
           <div className=" mx-8">
             {allUandA.map((i) => (
-              <div key={i.email} className=" my-5 flex space-x-4">
+              <div key={i.email} className=" border p-3 my-5 flex space-x-4">
                 <img
                   className="h-14 w-14 rounded-full   "
                   src={
@@ -89,12 +115,15 @@ const ManageUser = () => {
                   alt=""
                 />
                 <div className="flex w-3/4 col-span-2 items-center justify-between">
-                  <p> {i.name} </p>
+                  <div className="">
+                  <p className="mb-2"> {i.name} </p>
+                  <span className={`text-white py-1 px-2 rounded-xl ${i.role === 'agent' ? 'bg-red-300' : 'bg-blue-300' } `}> {i.role} </span>
+                  </div>
 
                   <div className=" flex gap-2">
                   <button
                       className={`py-1 px-2 text-white rounded-2xl ${
-                        userStatuses[i.email] === "pending" ? "bg-red-500" : "bg-green-600 cursor-not-allowed"
+                        userStatuses[i.email] === "pending" ? "bg-red-500" : " bg-slate-400 cursor-not-allowed"
                       }`}
                       disabled={userStatuses[i.email] === "approved"}
                       onClick={() => handleStatusChange(i)}
