@@ -6,28 +6,22 @@ import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import useAuth from '../../../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import useSingleUser from '../../../Hooks/useSingleUser';
+import toast from 'react-hot-toast';
 
 const CashoutAmount = () => {
-    const {user,cashoutUser} = useAuth()
+    const {user,cashoutAgent, setCashoutAmount} = useAuth()
     const axiosPublic = useAxiosPublic()
 
-    const { data: loger = [] } = useQuery({
-        queryKey: ["cashout"],
-        queryFn: async () => {
-          const { data } = await axiosPublic.get('/v1/loger', {
-            params: { email: user?.email },
-            withCredentials: true
-          });
-          return data;
-        },
-        enabled: !!user?.email // Only execute the query if user?.email is truthy
-      });
+    const {data: loger=[]} = useSingleUser({
+      queryKey:["loger"], params:{email: user?.email}
+    })
      
       const { data: singleAgent = [] } = useQuery({
         queryKey: ["singleAgent"],
         queryFn: async () => {
           const { data } = await axiosPublic.get('/v1/loger', {
-            params: { email: cashoutUser?.email },
+            params: { email: cashoutAgent?.email },
             withCredentials: true
           });
           return data;
@@ -41,7 +35,15 @@ const CashoutAmount = () => {
         handleSubmit
       } = useForm()
       const onSubmit =async (data) => {
-        console.log(data);
+        let {cashoutAmount} = data;
+        cashoutAmount = parseFloat(cashoutAmount);
+        if(cashoutAmount){
+            cashoutAmount = (cashoutAmount*1.5)/100 + cashoutAmount ;
+        }
+       
+        if( cashoutAmount > loger?.amount ) return toast.error('Insufficient Balance')
+          setCashoutAmount(cashoutAmount)
+        navigate('/cashoutFinal')
       }
 
     return (
@@ -58,7 +60,7 @@ const CashoutAmount = () => {
        <div className="mx-6 flex items-center gap-5">
         <FaDollarSign className="text-[#EC1C24]" />
         <input 
-         {...register("sendAmount",{required: true})}
+         {...register("cashoutAmount",{required: true})}
         className="block w-full px-4 py-2  border-[#EC1C24]  border-b-2   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300" type="number" placeholder="Amount" />
 
 

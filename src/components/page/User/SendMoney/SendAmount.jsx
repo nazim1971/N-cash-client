@@ -3,21 +3,19 @@ import Send from "../../../Common/Send";
 import {useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useSingleUser from "../../../Hooks/useSingleUser";
 
 
 const SendAmount = () => {
-    const {sendUser,setSendAmount,user} = useAuth();
+    const {receiveUser,setSendAmount,user} = useAuth();
      
     const {data: loger=[]} = useSingleUser({
       queryKey:["loger"], params:{email: user?.email}
     })
 
       const {data: reciver=[]} = useSingleUser({
-        queryKey:["reciver"], params:{email: sendUser?.email}
+        queryKey:["reciver"], params:{email: receiveUser?.email}
       })
  
     const navigate = useNavigate();

@@ -9,7 +9,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const SendMoney = () => {
 
-  const {setSendUser} = useAuth()
+  const {setReceiveUser} = useAuth()
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
   
@@ -22,7 +22,7 @@ const SendMoney = () => {
   });
   
   const handleUserD = (i)=>{
-    setSendUser(i)
+    setReceiveUser(i)
     navigate('/sendAmount')
   }
   

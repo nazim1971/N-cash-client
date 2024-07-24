@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import CashinAmount from "../page/User/CashIn/CashinAmount";
 
 export const AuthContext = createContext(null);
 
@@ -11,13 +12,27 @@ const AuthProvider = ({ children }) => {
     return storedAmount ? JSON.parse(storedAmount) : null;
   });
 
-  const [sendUser, setSendUser] = useState(() => {
-    const storedSendUser = localStorage.getItem("sendUser");
-    return storedSendUser ? JSON.parse(storedSendUser) : null;
+  const [receiveUser, setReceiveUser] = useState(() => {
+    const storedReceiveUser = localStorage.getItem("receiveUser");
+    return storedReceiveUser ? JSON.parse(storedReceiveUser) : null;
   });
 
-  const [cashoutUser, setCashoutUser] = useState(() => {
-    const storedAmount = localStorage.getItem("cashoutUser");
+  const [cashoutAgent, setCashoutAgent] = useState(() => {
+    const storedAmount = localStorage.getItem("cashoutAgent");
+    return storedAmount ? JSON.parse(storedAmount) : null;
+  });
+  const [cashoutAmount, setCashoutAmount] = useState(() => {
+    const storedAmount = localStorage.getItem("cashoutAmount");
+    return storedAmount ? JSON.parse(storedAmount) : null;
+  });
+
+  const [cashinAgent, setCashinAgent] = useState(() => {
+    const storedAmount = localStorage.getItem("cashinAgent");
+    return storedAmount ? JSON.parse(storedAmount) : null;
+  });
+
+  const [cashinAmount, setCashinAmount] = useState(() => {
+    const storedAmount = localStorage.getItem("cashinAmount");
     return storedAmount ? JSON.parse(storedAmount) : null;
   });
 
@@ -83,9 +98,12 @@ const AuthProvider = ({ children }) => {
       });
       if (res?.data?.Status === "Success") {
         localStorage.removeItem("user"); // Clear user data from localStorage
-        localStorage.removeItem("sendUser"); // Clear send User
+        localStorage.removeItem("receiveUser"); // Clear send User
         localStorage.removeItem("sendAmount"); // clear amount
-        localStorage.removeItem("cashoutUser"); // clear amount
+        localStorage.removeItem("cashoutAgent"); 
+        localStorage.removeItem("cashoutAmount");
+        localStorage.removeItem("cashinAgent");
+        localStorage.removeItem("cashinAmount");// clear amount
         setUser(null);
         toast.success("Logged out successfully");
       } else {
@@ -105,10 +123,10 @@ const AuthProvider = ({ children }) => {
       setUser(JSON.parse(storedUser));
     }
 
-    if (sendUser) {
-      localStorage.setItem("sendUser", JSON.stringify(sendUser));
+    if (receiveUser) {
+      localStorage.setItem("receiveUser", JSON.stringify(receiveUser));
     } else {
-      localStorage.removeItem("sendUser");
+      localStorage.removeItem("receiveUser");
     }
 
     if (sendAmount) {
@@ -117,14 +135,32 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("sendAmount");
     }
 
-    if (cashoutUser) {
-        localStorage.setItem("cashoutUser", JSON.stringify(cashoutUser));
+    if (cashoutAgent) {
+        localStorage.setItem("cashoutAgent", JSON.stringify(cashoutAgent));
       } else {
-        localStorage.removeItem("cashoutUser");
+        localStorage.removeItem("cashoutAgent");
+      }
+
+      if (cashoutAmount) {
+        localStorage.setItem("cashoutAmount", JSON.stringify(cashoutAmount));
+      } else {
+        localStorage.removeItem("cashoutAmount");
+      }
+
+      if (cashinAgent) {
+        localStorage.setItem("cashinAgent", JSON.stringify(cashinAgent));
+      } else {
+        localStorage.removeItem("cashinAgent");
+      }
+
+      if (cashinAmount) {
+        localStorage.setItem("cashinAmount", JSON.stringify(cashinAmount));
+      } else {
+        localStorage.removeItem("cashinAmount");
       }
 
     setLoader(false);
-  }, [sendUser, sendAmount,cashoutUser]);
+  }, [receiveUser, sendAmount, cashoutAgent, cashinAgent, cashoutAmount, cashinAmount]);
 
   // All values
   const allValues = {
@@ -136,11 +172,17 @@ const AuthProvider = ({ children }) => {
     logout,
     sendAmount,
     setSendAmount,
-    sendUser,
-    setSendUser,
+    receiveUser,
+    setReceiveUser,
     pinVerify,
-    cashoutUser,
-    setCashoutUser,
+    cashoutAgent,
+    setCashoutAgent,
+    cashinAgent,
+     setCashinAgent,
+     cashoutAmount,
+    setCashoutAmount,
+    cashinAmount, 
+    setCashinAmount
   };
 
   return (

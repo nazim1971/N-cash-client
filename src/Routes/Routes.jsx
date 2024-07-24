@@ -27,6 +27,9 @@ import AgentTransHistory from "../components/page/Agent/AgentTransHistory/AgentT
 import AdminRoute from "./AdminRoute";
 import ManageUser from "../components/page/Admin/ManageUser";
 import AllTrans from "../components/page/Admin/AllTrans";
+import CashinAmount from "../components/page/User/CashIn/CashinAmount";
+import CashoutFinal from "../components/page/User/CashOut/CashoutFinal";
+import CashinFinal from "../components/page/User/CashIn/CashinFinal";
 
 const routes = createBrowserRouter([
     {
@@ -93,6 +96,10 @@ const routes = createBrowserRouter([
         element: <Private> <UserRoute><CashoutAmount/></UserRoute> </Private>
        },
        {
+        path: '/cashoutFinal',
+        element: <Private> <UserRoute> <CashoutFinal/> </UserRoute> </Private>
+       },
+       {
         path: '/userReq',
         element: <Private> <UserRoute> <UserReq/> </UserRoute> </Private>
        },
@@ -100,6 +107,15 @@ const routes = createBrowserRouter([
         path: '/cashIn',
         element: <Private> <UserRoute> <CashIn/> </UserRoute> </Private>
        },
+       {
+        path: '/cashinAmount',
+        element: <Private> <UserRoute> <CashinAmount/> </UserRoute> </Private>
+       },
+       {
+        path: '/cashinFinal',
+        element: <Private> <UserRoute> <CashinFinal/> </UserRoute> </Private>
+       }
+       ,
        {
         path: '/userTransHistory',
         element: <Private> <UserRoute> <UserTransHistory/> </UserRoute> </Private>

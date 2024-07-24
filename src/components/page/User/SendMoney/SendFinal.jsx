@@ -11,7 +11,7 @@ import useSingleUser from "../../../Hooks/useSingleUser";
 
 
 const SendFinal = () => {
-    const {sendAmount,user,sendUser, pinVerify} = useAuth();
+    const {sendAmount,user,receiveUser, pinVerify} = useAuth();
     const [pass, setPass] = useState(false);
     const [charge, setCharge] = useState(0);
     const [uiAm, setUiAm] = useState(0)
@@ -32,7 +32,7 @@ const SendFinal = () => {
     })
 
       const {data: reciver=[]} = useSingleUser({
-        queryKey:["reciver"], params:{email: sendUser?.email}
+        queryKey:["reciver"], params:{email: receiveUser?.email}
       })
 
 
@@ -47,12 +47,12 @@ const SendFinal = () => {
         const updatedAm = mainAm-convertedAm;
          const transInfo ={
             status:"success",
-            method: 'Send-Money',
+            method: 'sendMoney',
             amount: convertedAm,
             senderEmail: user?.email,
             senderName: user?.name ,
-            reciverEmail: sendUser?.email,
-            reciverName: sendUser?.name
+            reciverEmail: receiveUser?.email,
+            reciverName: receiveUser?.name
          }
          const input = {
             email: user?.email,
