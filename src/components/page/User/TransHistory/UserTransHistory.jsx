@@ -32,7 +32,7 @@ const UserTransHistory = () => {
               <h4 className="border-b-2 pl-8 py-4 font-semibold">All Transaction  </h4>
               
              <div className=" mx-8">
-             {
+             { userAllTrans.length > 0 ?
               userAllTrans.map(i=> <div key={i._id} className="border my-5 flex space-x-4">
                  <img 
                   className="h-14 w-14 rounded-full   "
@@ -46,6 +46,10 @@ const UserTransHistory = () => {
                   <p className="bg-green-500 px-1 rounded-xl "> {i.amount}$ </p>
                 </div>
               </div>)
+              :
+              <div className="text-2xl text-stone-400 font-semibold min-h-screen flex justify-center items-center">
+                No Transactions
+              </div>
              }
             
              </div>

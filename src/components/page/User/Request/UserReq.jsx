@@ -24,7 +24,7 @@ const UserReq = () => {
 
     return (
         <div>
-          <div className="max-w-xl mx-auto  border">
+          <div className="max-w-xl mx-auto min-h-screen  border">
           <Send site={''} title={'All Request'} />
             
 
@@ -33,7 +33,7 @@ const UserReq = () => {
               <h4 className="border-b-2 pl-8 py-4 font-semibold">All pending request </h4>
               
              <div className=" mx-8">
-             {
+              { singleUserReq.length > 0 ?
               singleUserReq.map(i=> <div key={i._id} className="border my-5 flex space-x-4">
                  <img 
                   className="h-14 w-14 rounded-full   "
@@ -47,6 +47,10 @@ const UserReq = () => {
                   <p className="bg-green-500 px-1 rounded-xl "> {i.amount}$ </p>
                 </div>
               </div>)
+              :
+              <div className="text-2xl text-stone-400 font-semibold min-h-screen flex justify-center items-center">
+                No Request
+              </div>
              }
             
              </div>

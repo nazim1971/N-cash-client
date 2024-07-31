@@ -3,3 +3,9 @@
 @tailwind utilities;
 
 
+.navM p {
+    background: red;
+    padding: 8px;
+    border-radius: 8px;
+    color: white;
+}

@@ -5,6 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -56,20 +57,40 @@ const ManageUser = () => {
    // Update user status
    const handleStatusChange = async (item) => {
     const updatedStatus = userStatuses[item.email] === "pending" ? "approved" : "pending";
-    try {
-      await axiosSecure.patch(
-        '/v1/updateAccount',
-        { email: item.email, status: updatedStatus },
-        { withCredentials: true }
-      );
-      setUserStatuses((prev) => ({
-        ...prev,
-        [item.email]: updatedStatus,
-      }));
-      console.log(`Status for ${item.name} updated to: ${updatedStatus}`);
-    } catch (error) {
-      console.error('Error updating status:', error);
-    }
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Approve"
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+
+        try {
+          await axiosSecure.patch(
+            '/v1/updateAccount',
+            { email: item.email, status: updatedStatus},
+            { withCredentials: true }
+          );
+          setUserStatuses((prev) => ({
+            ...prev,
+            [item.email]: updatedStatus,
+          }));
+          console.log(`Status for ${item.name} updated to: ${updatedStatus}`);
+        } catch (error) {
+          console.error('Error updating status:', error);
+        }
+        Swal.fire({
+          title: "Approved!",
+          text: "User account has been approved.",
+          icon: "success"
+        });
+      }
+    });
+   
   };
   
 

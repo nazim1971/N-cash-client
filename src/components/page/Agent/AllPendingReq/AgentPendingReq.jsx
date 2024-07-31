@@ -5,7 +5,6 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useSingleUser from "../../../Hooks/useSingleUser";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import LoadingSpinner from "../../../Common/LoadingSpiner";
 
 const AgentPendingReq = () => {
   const { user,reqUser, setReqUser } = useAuth();
@@ -132,7 +131,7 @@ const AgentPendingReq = () => {
 
 
   return (
-    <div className="max-w-xl mx-auto  border">
+    <div className="max-w-xl min-h-screen mx-auto  border">
       <Send site={""} title={"All Request"} />
 
       <div className="">
@@ -141,7 +140,8 @@ const AgentPendingReq = () => {
         </h4>
 
         <div className=" mx-8">
-          {singleAgentReq.map((i) => (
+          { singleAgentReq.length > 0 ? 
+          singleAgentReq.map((i) => (
             <div key={i._id} className="border my-5 flex space-x-4">
               <img
                 className="h-14 w-14 rounded-full   "
@@ -163,7 +163,12 @@ const AgentPendingReq = () => {
                 </button>
               </div>
             </div>
-          ))}
+          ))
+          :
+          <div className="text-2xl text-stone-400 font-semibold min-h-screen flex justify-center items-center">
+            No Request
+          </div>
+        }
         </div>
       </div>
     </div>

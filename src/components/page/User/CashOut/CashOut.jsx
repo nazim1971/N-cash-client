@@ -33,7 +33,7 @@ const CashOut = () => {
 
 
           <div className="">
-            <h4 className="border-b-2 pl-8 pb-4 font-semibold">All Agents </h4>
+            <h4 className="border-b-2 pl-8 py-4 font-semibold">All Agents </h4>
             
            <div className=" mx-8">
            {
