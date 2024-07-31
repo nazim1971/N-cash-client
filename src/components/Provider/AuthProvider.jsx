@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import CashinAmount from "../page/User/CashIn/CashinAmount";
 
 export const AuthContext = createContext(null);
 
@@ -33,6 +32,11 @@ const AuthProvider = ({ children }) => {
 
   const [cashinAmount, setCashinAmount] = useState(() => {
     const storedAmount = localStorage.getItem("cashinAmount");
+    return storedAmount ? JSON.parse(storedAmount) : null;
+  });
+
+  const [reqUser, setReqUser] = useState(() => {
+    const storedAmount = localStorage.getItem("reqUser");
     return storedAmount ? JSON.parse(storedAmount) : null;
   });
 
@@ -103,6 +107,7 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("cashoutAgent"); 
         localStorage.removeItem("cashoutAmount");
         localStorage.removeItem("cashinAgent");
+        localStorage.removeItem("reqUser");
         localStorage.removeItem("cashinAmount");// clear amount
         setUser(null);
         toast.success("Logged out successfully");
@@ -159,8 +164,14 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("cashinAmount");
       }
 
+      if (reqUser) {
+        localStorage.setItem("reqUser", JSON.stringify(reqUser));
+      } else {
+        localStorage.removeItem("reqUser");
+      }
+
     setLoader(false);
-  }, [receiveUser, sendAmount, cashoutAgent, cashinAgent, cashoutAmount, cashinAmount]);
+  }, [receiveUser, sendAmount, cashoutAgent, cashinAgent, cashoutAmount, cashinAmount, reqUser]);
 
   // All values
   const allValues = {
@@ -182,7 +193,9 @@ const AuthProvider = ({ children }) => {
      cashoutAmount,
     setCashoutAmount,
     cashinAmount, 
-    setCashinAmount
+    setCashinAmount,
+    reqUser, 
+    setReqUser
   };
 
   return (

@@ -14,7 +14,7 @@ const CashinAmount = () => {
   const axiosPublic = useAxiosPublic()
 
   const {data: loger=[]} = useSingleUser({
-    queryKey:["loger"], params:{email: user?.email}
+    queryKey:["loger"], params:{email: user?.email}, enabled: !!user?.email
   })
    
     const { data: singleAgent = [] } = useQuery({

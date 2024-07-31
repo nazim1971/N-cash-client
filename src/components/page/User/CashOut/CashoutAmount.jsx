@@ -14,7 +14,7 @@ const CashoutAmount = () => {
     const axiosPublic = useAxiosPublic()
 
     const {data: loger=[]} = useSingleUser({
-      queryKey:["loger"], params:{email: user?.email}
+      queryKey:["loger"], params:{email: user?.email}, enabled: !!user?.email
     })
      
       const { data: singleAgent = [] } = useQuery({
@@ -36,13 +36,13 @@ const CashoutAmount = () => {
       } = useForm()
       const onSubmit =async (data) => {
         let {cashoutAmount} = data;
-        cashoutAmount = parseFloat(cashoutAmount);
+        cashoutAmount = parseInt(cashoutAmount);
         if(cashoutAmount){
             cashoutAmount = (cashoutAmount*1.5)/100 + cashoutAmount ;
         }
        
         if( cashoutAmount > loger?.amount ) return toast.error('Insufficient Balance')
-          setCashoutAmount(cashoutAmount)
+          setCashoutAmount(parseFloat(cashoutAmount.toFixed(2)))
         navigate('/cashoutFinal')
       }
 

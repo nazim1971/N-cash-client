@@ -11,11 +11,11 @@ const SendAmount = () => {
     const {receiveUser,setSendAmount,user} = useAuth();
      
     const {data: loger=[]} = useSingleUser({
-      queryKey:["loger"], params:{email: user?.email}
+      queryKey:["loger"], params:{email: user?.email}, enabled: !!user?.email
     })
 
       const {data: reciver=[]} = useSingleUser({
-        queryKey:["reciver"], params:{email: receiveUser?.email}
+        queryKey:["reciver"], params:{email: receiveUser?.email},  enabled: !!receiveUser?.email
       })
  
     const navigate = useNavigate();

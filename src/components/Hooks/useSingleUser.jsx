@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from './useAxiosPublic';
 
 
-const useSingleUser = ({ queryKey, params = {} }) => {
+const useSingleUser = ({ queryKey, params = {},enabled }) => {
     const axiosPublic = useAxiosPublic()
   return useQuery({
     queryKey,
@@ -13,6 +13,7 @@ const useSingleUser = ({ queryKey, params = {} }) => {
         withCredentials: true});
       return data;
     },
+    enabled
   });
 };
 

@@ -21,8 +21,6 @@ import UserRoute from "./UserRoute";
 import UserReq from "../components/page/User/Request/UserReq";
 import UserTransHistory from "../components/page/User/TransHistory/UserTransHistory";
 import AgentRoute from "./AgentRoute";
-import AgentCashoutReq from "../components/page/Agent/CashoutReq/AgentCashoutReq";
-import AgentCashInReq from "../components/page/Agent/CashInReq/AgentCashInReq";
 import AgentTransHistory from "../components/page/Agent/AgentTransHistory/AgentTransHistory";
 import AdminRoute from "./AdminRoute";
 import ManageUser from "../components/page/Admin/ManageUser";
@@ -30,6 +28,7 @@ import AllTrans from "../components/page/Admin/AllTrans";
 import CashinAmount from "../components/page/User/CashIn/CashinAmount";
 import CashoutFinal from "../components/page/User/CashOut/CashoutFinal";
 import CashinFinal from "../components/page/User/CashIn/CashinFinal";
+import AgentPendingReq from "../components/page/Agent/AllPendingReq/AgentPendingReq";
 
 const routes = createBrowserRouter([
     {
@@ -124,12 +123,8 @@ const routes = createBrowserRouter([
 
        // start Agent related route
        {
-        path: '/agentCashoutReq',
-        element: <Private> <AgentRoute> <AgentCashoutReq/> </AgentRoute> </Private>
-       },
-       {
-        path: '/agentCashInReq',
-        element: <Private> <AgentRoute> <AgentCashInReq/> </AgentRoute> </Private>
+        path: '/agentPendingReq',
+        element: <Private> <AgentRoute> <AgentPendingReq/> </AgentRoute> </Private>
        },
        {
         path: '/agentTransHistory',

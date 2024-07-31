@@ -9,7 +9,7 @@ const Home = () => {
     const [isAmountShown, setIsAmountShown] = useState(false);
     const {user}  =useAuth()
     const {data: loger=[]} = useSingleUser({
-        queryKey:["loger"], params:{email: user?.email}
+        queryKey:["loger"], params:{email: user?.email}, enabled: !!user?.email
       })
 
       const handleClick = () => {

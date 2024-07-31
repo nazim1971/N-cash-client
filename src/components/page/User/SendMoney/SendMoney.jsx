@@ -52,7 +52,7 @@ const SendMoney = () => {
               
              <div className=" mx-8">
              {
-              sendUser.map(i=> <div key={i.email} className=" my-5 flex space-x-4">
+              sendUser.map(i=> <div key={i.email} className="border my-5 flex space-x-4">
                  <img 
                   className="h-14 w-14 rounded-full   "
                   src={"https://i.ibb.co/VHD1J6g/user-profile-icon-free-vector.jpg" }

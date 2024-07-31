@@ -19,7 +19,7 @@ const Navber = () => {
   }
 
   const {data: loger=[]} = useSingleUser({
-    queryKey:["loger"], params:{email: user?.email}
+    queryKey:["loger"], params:{email: user?.email}, enabled: !!user?.email
   })
 
     const menu = <>
@@ -46,10 +46,7 @@ const Navber = () => {
       {loger?.role === 'agent' && (
         <>
         <li>
-            <NavLink to="/agentCashoutReq">Cash-Out Req</NavLink>
-          </li>
-          <li>
-            <NavLink to="/agentCashInReq">Cash-In Req</NavLink>
+            <NavLink to="/agentPendingReq">All Request</NavLink>
           </li>
           <li>
             <NavLink to="/agentTransHistory">Transactions</NavLink>

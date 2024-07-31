@@ -22,8 +22,9 @@ const CashoutFinal = () => {
     useEffect(()=>{
         setUiAm(cashoutAmount);
         if(cashoutAmount){
-            setUiAm(cashoutAmount - cashoutAmount/100*1.5)
-            setCharge(cashoutAmount/100*1.5)
+            const charge = cashoutAmount / 100 * 1.5;
+            setUiAm(Math.round(cashoutAmount - charge))
+            setCharge(Math.round(charge*2)/2)
         }
     },[])
 
@@ -49,7 +50,7 @@ const CashoutFinal = () => {
         const {pinNumber} = i
          const transInfo ={
             status:"pending",
-            method: 'cashout',
+            method: 'Cash-Out',
             amount: cashoutAmount,
             senderEmail: user?.email,
             senderName: user?.name ,

@@ -40,12 +40,12 @@ const CashinFinal = () => {
         const {pinNumber} = i
          const transInfo ={
             status:"pending",
-            method: 'cashIn',
+            method: 'Cash-In',
             amount: cashinAmount,
-            senderEmail: singleAgent?.email,
-            senderName: singleAgent?.name,
-            reciverEmail: user?.email,
-            reciverName:  user?.name 
+            senderEmail: user?.email,
+            senderName: user?.name,
+            reciverEmail: singleAgent?.email,
+            reciverName:  singleAgent?.name 
          }
          const input = {
             email: user?.email,

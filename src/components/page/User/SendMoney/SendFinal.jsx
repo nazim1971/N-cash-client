@@ -28,11 +28,11 @@ const SendFinal = () => {
     },[])
 
     const {data: loger=[]} = useSingleUser({
-      queryKey:["loger"], params:{email: user?.email}
+      queryKey:["loger"], params:{email: user?.email}, enabled: !!user?.email
     })
 
       const {data: reciver=[]} = useSingleUser({
-        queryKey:["reciver"], params:{email: receiveUser?.email}
+        queryKey:["reciver"], params:{email: receiveUser?.email}, enabled: !!receiveUser?.email
       })
 
 
@@ -47,7 +47,7 @@ const SendFinal = () => {
         const updatedAm = mainAm-convertedAm;
          const transInfo ={
             status:"success",
-            method: 'sendMoney',
+            method: 'Send-Money',
             amount: convertedAm,
             senderEmail: user?.email,
             senderName: user?.name ,
