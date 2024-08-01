@@ -39,8 +39,8 @@ const onSubmit =async (data) => {
           <div className="hidden bg-cover lg:block lg:w-1/2" style={{backgroundImage: 'url(https://i.ibb.co/MfYyWhP/login.jpg)'}} ></div>
       
           <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
-              <div className="flex justify-center mx-auto">
-                  <img className="w-auto h-10 sm:h-12" src="https://i.ibb.co/GJg1fYZ/Brain-boost-removebg-preview.png" alt="" />
+          <div className="flex justify-center mx-auto">
+                 <Link to='/'> <img className="w-auto h-10 sm:h-12" src="https://i.ibb.co/GJg1fYZ/Brain-boost-removebg-preview.png" alt="" /></Link>
               </div>
       
               <p className="mt-3 text-xl text-center ">

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import useSingleUser from "../Hooks/useSingleUser";
 import Navber from "../Navber/Navber";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 
 
@@ -16,7 +16,7 @@ const Home = () => {
   const {user, logout}  = useAuth();
   const handleLogout =async ()=>{
   await logout();
-  nagivate('/loginE');
+  nagivate('/');
   }
     const [isAmountShown, setIsAmountShown] = useState(false);
     const {data: loger=[]} = useSingleUser({
@@ -50,13 +50,19 @@ const Home = () => {
       }
   };
     return (
-        <div className="max-w-xl mx-auto h-screen border">
+        <div className="max-w-xl mx-auto min-h-screen border">
         <div className=" text-center space-y-2 py-5 text-2xl  px-10 bg-[#EC1C24] text-white ">
-        <div>
-         <h2 className="font-semibold">N-Cash</h2> 
-         <div className="navbar-end">
+        <div className="flex justify-between">
+         <h2 className="font-semibold ">N-Cash</h2> 
+         <div >
 
-<label className="swap mr-4 swap-rotate">
+
+
+
+        {/* user picture and logout/login btn */}
+        {user ? (
+          <div className="flex gap-3 items-center z-[1000] ">
+            <label className="swap mr-4 swap-rotate">
 
 {/* this hidden checkbox controls the state */}
 <input onChange={handleToggle} type="checkbox" value='synthwave' />
@@ -68,15 +74,10 @@ const Home = () => {
 <svg className="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
 
 </label>
-
-
-        {/* user picture and logout/login btn */}
-        {user ? (
-          <div className="flex gap-3 items-center z-[1000] ">
             <div> 
               <button
               onClick={handleLogout}
-              className="btn bg-red-600 text-white"
+              className="btn bg-blue-500 border-none text-white"
             >
               Logout
             </button>
@@ -95,7 +96,9 @@ const Home = () => {
         )}
       </div>
           </div> 
-        <p > {loger?.role} Dashboard </p>
+        {
+          user && <>
+          <p > {loger?.role} Dashboard </p>
         <hr />
         <p className=" font-semibold">Welcome {loger?.name} </p>
         {
@@ -103,11 +106,13 @@ const Home = () => {
             <button onClick={handleClick} className="btn rounded-3xl text-[#EC1C24]"> {text} </button>
         </p>
         }
+          </>
+        }
        </div>
        <div className="m-6 space-y-6">
 
         
-       <div className="flex items-center gap-5  border p-4 ">
+      {user ? <div className="flex items-center gap-5  border p-4 ">
        <img 
                   className="h-14 w-14 rounded-full   "
                   src={"https://i.ibb.co/VHD1J6g/user-profile-icon-free-vector.jpg" }
@@ -118,6 +123,30 @@ const Home = () => {
                 <p> {loger.number} </p>
             </div>
         </div>
+        :
+        <div className="navM flex gap-2">
+           <p>
+           <NavLink to="/sendMoney">
+            <img className="mx-auto" src='sendMoney.png' alt="" />
+            </NavLink>
+            <span>Send Money</span>
+           </p>
+          
+           <p>
+           <NavLink to="/cashout">
+            <img className="mx-auto" src='cashOut.png' alt="" />
+            </NavLink>
+            <span>Cash-Out</span>
+           </p>
+
+           <p>
+           <NavLink to="/cashin">
+            <img className="mx-auto" src='cashIn.png' alt="" />
+            </NavLink>
+            <span>Cash-In</span>
+           </p>
+        </div>
+        }
          <Navber/>
       
        </div>

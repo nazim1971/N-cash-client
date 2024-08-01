@@ -1,9 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../components/Root/Root";
 import Home from "../components/Home/Home";
-import Contect from "../components/Navber/Contect";
-import About from "../components/Navber/About";
-import AddProduct from "../components/Navber/AddProduct";
 import SignUp from "../components/page/SignIn/SignUp";
 import UserRegister from "../components/page/SignIn/UserRegister";
 import AgentRegister from "../components/page/SignIn/AgentRegister";
@@ -41,14 +38,6 @@ const routes = createBrowserRouter([
           element: <Home/>
         },
        {
-        path: '/contect',
-        element: <Contect/>
-       },
-       {
-        path: '/about',
-        element: <About/>
-       },
-       {
         path: '/loginE',
         element: <LoginWithEmail/>
        },
@@ -69,10 +58,6 @@ const routes = createBrowserRouter([
         element: <AgentRegister/>
        }
        ,
-       {
-        path: '/addProduct',
-        element: <AddProduct/>
-       },
        //user related routes
        {
         path: '/sendMoney',
