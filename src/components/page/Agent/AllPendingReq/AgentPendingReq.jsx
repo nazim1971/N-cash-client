@@ -132,7 +132,7 @@ const AgentPendingReq = () => {
 
   return (
     <div className="max-w-xl min-h-screen mx-auto  border">
-      <Send site={""} title={"All Request"} />
+      <Send site={"home"} title={"All Request"} />
 
       <div className="">
         <h4 className="border-b-2 pl-8 py-4 font-semibold">

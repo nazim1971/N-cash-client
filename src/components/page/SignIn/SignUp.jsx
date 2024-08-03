@@ -7,7 +7,7 @@ const SignUp = () => {
     const {user} = useAuth()
     const navigate = useNavigate()
 
-    if(user) return navigate('/')
+    if(user) return navigate('/home')
     return (
         <div className="my-20">
         <div className=" p-5 w-full border my-20 max-w-sm mx-auto  rounded-lg shadow-lg  lg:max-w-4xl">

@@ -24,7 +24,7 @@ const AgentTransHistory = () => {
     return (
         <div>
         <div className="max-w-xl mx-auto min-h-screen  border">
-       <Send site={''} title={'All Transactions'} />
+       <Send site={'home'} title={'All Transactions'} />
           
 
 

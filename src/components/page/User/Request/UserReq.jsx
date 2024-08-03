@@ -25,7 +25,7 @@ const UserReq = () => {
     return (
         <div>
           <div className="max-w-xl mx-auto min-h-screen  border">
-          <Send site={''} title={'All Request'} />
+          <Send site={'home'} title={'All Request'} />
             
 
 

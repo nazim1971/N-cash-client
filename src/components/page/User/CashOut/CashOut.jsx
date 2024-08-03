@@ -28,7 +28,7 @@ const CashOut = () => {
     return (
         <div>
         <div className="max-w-xl mx-auto min-h-screen  border">
-          <Send site={''} title={"Cash Out"}/>
+          <Send site={'home'} title={"Cash Out"}/>
           
 
 

@@ -27,11 +27,11 @@ const onSubmit =async (data) => {
   const res = await login(userInfo);
   if (res?.Status === "Success") {
     console.log(res.Status);
-      navigate( "/");
+      navigate( "/home");
     }
 }
 
- if(user) return navigate('/')
+ if(user) return navigate('/home')
 
     return (
       <div className="my-20">
@@ -52,7 +52,7 @@ const onSubmit =async (data) => {
               <div className="flex items-center justify-between mt-4">
                   <span className="w-1/5 border-b  lg:w-1/4"></span>
       
-                  <Link to='/loginE' className="text-xs text-center text-red-500 font-semibold  uppercase hover:underline">login
+                  <Link to='/' className="text-xs text-center text-red-500 font-semibold  uppercase hover:underline">login
                       with Email</Link>
       
                   <span className="w-1/5 border-b  lg:w-1/4"></span>

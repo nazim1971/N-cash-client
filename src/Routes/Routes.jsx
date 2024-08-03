@@ -34,11 +34,11 @@ const routes = createBrowserRouter([
       errorElement: <Error/> ,
       children: [
         {
-          path: '/',
+          path: '/home',
           element: <Home/>
         },
        {
-        path: '/loginE',
+        path: '/',
         element: <LoginWithEmail/>
        },
        {

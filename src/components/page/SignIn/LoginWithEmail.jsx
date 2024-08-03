@@ -27,11 +27,11 @@ const onSubmit =async (data) => {
   const res = await login(userInfo);
   if (res?.Status === "Success") {
     console.log(res.Status);
-      navigate( "/");
+      navigate( "/home");
     }
 }
 
-  if(user) return navigate('/')
+  if(user) return navigate('/home')
 
     return (
       <div className="my-20">

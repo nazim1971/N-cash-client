@@ -48,7 +48,7 @@ const UserRegister = () => {
           if (res.data.insertedId) {
            
             toast.success("Registration Complete");
-            navigate('/loginE')
+            navigate('/')
           }
         });
       } catch (err) {
@@ -63,7 +63,7 @@ const UserRegister = () => {
 
     console.table("Form Data", userInfo);
   };
-  if(user) return navigate('/')
+  if(user) return navigate('/home')
   return (
     <div className="my-20">
       <div className="flex w-full border my-20 max-w-sm mx-auto overflow-hidden  rounded-lg shadow-lg  lg:max-w-4xl">
@@ -150,7 +150,7 @@ const UserRegister = () => {
             <span className="w-1/5 border-b  md:w-1/4"></span>
 
             <Link
-              to="/loginE"
+              to="/"
               className="text-xs  uppercase  hover:underline text-rose-500"
             >
               or sign in

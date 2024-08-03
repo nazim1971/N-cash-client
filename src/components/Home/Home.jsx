@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import useSingleUser from "../Hooks/useSingleUser";
 import Navber from "../Navber/Navber";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 
 const Home = () => {
-
-
 
   const nagivate = useNavigate();
 
@@ -60,7 +58,7 @@ const Home = () => {
 
 
         {/* user picture and logout/login btn */}
-        {user ? (
+        {user && (
           <div className="flex gap-3 items-center z-[1000] ">
             <label className="swap mr-4 swap-rotate">
 
@@ -84,16 +82,7 @@ const Home = () => {
             </div>
             
           </div>
-        ) : (
-          <div className="flex gap-2">
-            <Link to="/loginE" className="btn bg-green-500 text-white">
-              Login
-            </Link>
-            <Link to="/register" className="btn text-green-500 ">
-              Register
-            </Link>
-          </div>
-        )}
+        )} 
       </div>
           </div> 
         {
@@ -112,7 +101,7 @@ const Home = () => {
        <div className="m-6 space-y-6">
 
         
-      {user ? <div className="flex items-center gap-5  border p-4 ">
+      {user && <div className="flex items-center gap-5  border p-4 ">
        <img 
                   className="h-14 w-14 rounded-full   "
                   src={"https://i.ibb.co/VHD1J6g/user-profile-icon-free-vector.jpg" }
@@ -123,30 +112,7 @@ const Home = () => {
                 <p> {loger.number} </p>
             </div>
         </div>
-        :
-        <div className="navM flex gap-2">
-           <p>
-           <NavLink to="/sendMoney">
-            <img className="mx-auto" src='sendMoney.png' alt="" />
-            </NavLink>
-            <span>Send Money</span>
-           </p>
-          
-           <p>
-           <NavLink to="/cashout">
-            <img className="mx-auto" src='cashOut.png' alt="" />
-            </NavLink>
-            <span>Cash-Out</span>
-           </p>
-
-           <p>
-           <NavLink to="/cashin">
-            <img className="mx-auto" src='cashIn.png' alt="" />
-            </NavLink>
-            <span>Cash-In</span>
-           </p>
-        </div>
-        }
+}
          <Navber/>
       
        </div>

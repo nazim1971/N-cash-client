@@ -29,7 +29,7 @@ const SendMoney = () => {
     return (
         <div>
           <div className="max-w-xl mx-auto  border">
-            <Send site={''} title={"Send Money"}/>
+            <Send site={'home'} title={"Send Money"}/>
 
             <div className="">
               <h4 className="border-b-2 pl-8 py-4 font-semibold">All Contacts </h4>

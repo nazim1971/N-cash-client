@@ -83,7 +83,7 @@ const Navber = () => {
         <div>
             <div className="">
       
-      <div className="navM flex gap-2">
+      <div className="navM flex flex-wrap gap-2">
         {menu}
       </div>
   
