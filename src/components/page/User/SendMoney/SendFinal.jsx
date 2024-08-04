@@ -69,7 +69,7 @@ const SendFinal = () => {
         if (data.insertedId) {
           
            toast.success("Send Money Complete");
-           navigate('/')
+           navigate('/home')
          }
           }
 

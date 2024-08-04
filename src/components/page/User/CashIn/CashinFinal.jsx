@@ -59,7 +59,7 @@ const CashinFinal = () => {
         if (data.insertedId) {
           
            toast.success("Cash-In Request Send");
-           navigate('/')
+           navigate('/home')
          }
           }
 

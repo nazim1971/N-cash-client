@@ -69,7 +69,7 @@ const CashoutFinal = () => {
         if (data.insertedId) {
           
            toast.success("Cash-Out Request Send");
-           navigate('/')
+           navigate('/home')
          }
           }
 
