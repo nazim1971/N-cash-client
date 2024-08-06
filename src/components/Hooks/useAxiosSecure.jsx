@@ -4,7 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const axiosSecure = axios.create({
-    baseURL: import.meta.env.VITE_LINK
+    baseURL: 'https://n-cash-server.vercel.app'
 });
 
 const useAxiosSecure = () => {
