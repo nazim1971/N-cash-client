@@ -69,7 +69,7 @@ const AgentRegister = () => {
       <div className="flex w-full border my-20 max-w-sm mx-auto overflow-hidden  rounded-lg shadow-lg  lg:max-w-4xl">
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
         <div className="flex justify-center mx-auto">
-                 <Link to='/'> <img className="w-auto h-10 sm:h-12" src="https://i.ibb.co/QcPMHwG/Screenshot-2024-08-08-004934.png" alt="" /></Link>
+                 <Link to='/'> <img className="w-auto h-10 rounded-full sm:h-12" src="https://i.ibb.co/QcPMHwG/Screenshot-2024-08-08-004934.png" alt="" /></Link>
               </div>
 
           <p className="mt-3 text-xl text-center ">
