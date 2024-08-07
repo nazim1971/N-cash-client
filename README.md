@@ -46,15 +46,9 @@ cd n-cash-client
 npm install
 ```
 
-3. **Set Up Environment Variables:**
+3. **Set Up Base URL:**
 
-Create a `.env.local` file in the root directory of your project and add the following:
-
-```
-VITE_LINK=your_server_link_here
-```
-
-Replace `your_server_link_here` with the actual server link.
+Change the base URL in `useAxiosPublic` and `useAxiosSecure` to your server's live link.
 
 4. **Run the Project:**
 
@@ -70,6 +64,4 @@ For the server-side setup, please visit the [N-Cash Server Repository](https://g
 
 ### Contact
 
-For any questions or support, please reach out to [nazimmmuddin10@gmail.com](mailto:nazimmuddin10@gmail.com).
-
-
+For any questions or support, please reach out to [nazimmuddin10@gmail.com](mailto:nazimmuddin10@gmail.com).
