@@ -111,7 +111,7 @@ const ManageUser = () => {
          <div className="flex items-center gap-2">
          <input
          value={search}
-         onChange={ (e)=> e.target.value(setSearch) }
+         onChange={ (e)=> setSearch(e.target.value) }
                  className="block w-full px-4 py-2  border-[#EC1C24]  border-b-2   focus:border   focus:outline-none " type="text" placeholder="Type User Name" />
          <Link> <button className="bg-[#EC1C24] h-8 w-8 rounded-full flex justify-center items-center"><FaArrowRight className=" text-white "/></button> </Link>
          </div>
