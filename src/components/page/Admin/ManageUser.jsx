@@ -94,10 +94,6 @@ const ManageUser = () => {
   };
   
 
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-  };
-
   useEffect(() => {
     refetch();
   }, [search, refetch]);
@@ -108,7 +104,18 @@ const ManageUser = () => {
         <Send site={"home"} title={"Manage User"} />
 
         <div className="">
-
+        <div className="m-10">
+          <div className="mb-2">
+            <label className="pl-4 font-semibold ">Search</label>
+          </div>
+         <div className="flex items-center gap-2">
+         <input
+         value={search}
+         onChange={ (e)=> e.target.value(setSearch) }
+                 className="block w-full px-4 py-2  border-[#EC1C24]  border-b-2   focus:border   focus:outline-none " type="text" placeholder="Type User Name" />
+         <Link> <button className="bg-[#EC1C24] h-8 w-8 rounded-full flex justify-center items-center"><FaArrowRight className=" text-white "/></button> </Link>
+         </div>
+          </div>
         
           <h4 className="border-b-2 my-2 pl-8 py-4 font-semibold">
             All Users and Agents{" "}
